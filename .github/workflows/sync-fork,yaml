@@ -1,0 +1,29 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          repository: onedr0p/home-ops
+          path: source
+
+      - name: Checkout fork repo
+        uses: actions/checkout@v4
+        with:
+          repository: osnabrugge/onedr0p-home-ops
+          path: fork
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync source to fork
+        run: |
+          cd fork
+          git pull --rebase source main
+          git push origin main
