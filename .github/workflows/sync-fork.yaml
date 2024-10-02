@@ -9,18 +9,17 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source repo
-        uses: actions/checkout@v4
-        with:
-          repository: onedr0p/home-ops
-          path: source
-
       - name: Checkout fork repo
         uses: actions/checkout@v4
         with:
           repository: osnabrugge/onedr0p-home-ops
           path: fork
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add source remote
+        run: |
+          cd fork
+          git remote add source https://github.com/onedr0p/home-ops.git
 
       - name: Sync source to fork
         run: |
