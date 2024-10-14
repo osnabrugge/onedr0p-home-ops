@@ -3,21 +3,20 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app limitarr
+  name: &app certificates
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: network
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/default/limitarr/app
-  prune: true
+  path: ./kubernetes/main/apps/network/certificates/app
+  prune: false
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: false
+  wait: true
   interval: 30m
-  retryInterval: 1m
   timeout: 5m

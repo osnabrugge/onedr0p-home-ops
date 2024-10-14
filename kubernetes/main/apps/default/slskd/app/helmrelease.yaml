@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.4.0
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -83,7 +83,7 @@ spec:
         controller: slskd
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.42.127
+          lbipam.cilium.io/ips: 192.168.42.127
         ports:
           http:
             port: *port
