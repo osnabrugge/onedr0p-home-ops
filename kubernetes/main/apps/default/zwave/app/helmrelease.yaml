@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/zwave-js/zwave-js-ui
-              tag: 9.23.0@sha256:f21a32e2edd11ac5301a4cb5f68b08ee46a18b262c30f6e6b3e56be45a4cdad7
+              tag: 9.25.0@sha256:f00866bdc2376e19bad2b8db94d056107279efd5277447c9229d16315f33cd82
             env:
               TZ: America/New_York
               PORT: &port 80
@@ -95,5 +95,9 @@ spec:
         existingClaim: zwave
         globalMounts:
           - path: /usr/src/app/store
+      cache:
+        existingClaim: zwave-cache
+        globalMounts:
+          - path: /usr/src/app/store/.config-db
       tmp:
         type: emptyDir
