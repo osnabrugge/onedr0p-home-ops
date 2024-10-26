@@ -24,5 +24,6 @@ jobs:
       - name: Sync source to fork
         run: |
           cd fork
-          git pull --rebase source main
-          git push origin main
+          git fetch source
+          git reset --hard source/main
+          git push origin main --force
