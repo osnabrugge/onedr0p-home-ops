@@ -19,7 +19,7 @@ _... managed with Flux, Renovate, and GitHub Actions_ 🤖
 
 <div align="center">
 
-[![Home-Internet](https://img.shields.io/uptimerobot/status/m793494864-dfc695db066960233ac70f45?color=brightgreeen&label=Home%20Internet&style=for-the-badge&logo=v&logoColor=white)](https://status.devbu.io)&nbsp;&nbsp;
+[![Home-Internet](https://img.shields.io/uptimerobot/status/m793494864-dfc695db066960233ac70f45?color=brightgreeen&label=Home%20Internet&style=for-the-badge&logo=ubiquiti&logoColor=white)](https://status.devbu.io)&nbsp;&nbsp;
 [![Status-Page](https://img.shields.io/uptimerobot/status/m793599155-ba1b18e51c9f8653acd0f5c1?color=brightgreeen&label=Status%20Page&style=for-the-badge&logo=statuspage&logoColor=white)](https://status.devbu.io)&nbsp;&nbsp;
 [![Alertmanager](https://img.shields.io/uptimerobot/status/m793494864-dfc695db066960233ac70f45?color=brightgreeen&label=Alertmanager&style=for-the-badge&logo=prometheus&logoColor=white)](https://status.devbu.io)
 
@@ -84,6 +84,7 @@ This Git repository contains the following directories under [Kubernetes](./kube
 │   ├── 📁 bootstrap      # bootstrap procedures
 │   ├── 📁 flux           # core flux configuration
 │   └── 📁 templates      # re-useable components
+├── 📁 shared          # shared cluster resources
 └── 📁 ...             # other clusters
 ```
 
@@ -147,19 +148,17 @@ In my cluster there are two [ExternalDNS](https://github.com/kubernetes-sigs/ext
   <img src="https://raw.githubusercontent.com/onedr0p/home-ops/main/docs/src/assets/rack.png" align="center" width="200px" alt="dns"/>
 </details>
 
-| Device                      | Count | OS Disk Size | Data Disk Size               | Ram  | Operating System | Purpose                 |
-|-----------------------------|-------|--------------|------------------------------|------|------------------|-------------------------|
-| Intel NUC8i5BEH             | 3     | 1TB SSD      | 1TB NVMe (rook-ceph)         | 64GB | Talos            | Kubernetes Controllers  |
-| Intel NUC8i7BEH             | 3     | 1TB SSD      | 1TB NVMe (rook-ceph)         | 64GB | Talos            | Kubernetes Workers      |
-| PowerEdge T340              | 1     | 2TB SSD      |                              | 64GB | Ubuntu 22.04     | NFS + Backup Server     |
-| Lenovo SA120                | 1     | -            | 10x22TB ZFS (mirrored vdevs) | -    | -                | DAS                     |
-| PiKVM (RasPi 4)             | 1     | 64GB (SD)    | -                            | 4GB  | PiKVM (Arch)     | KVM                     |
-| TESmart 8 Port KVM Switch   | 1     | -            | -                            | -    | -                | Network KVM (for PiKVM) |
-| UniFi UDMP Max              | 1     | -            | 2x12TB HDD                   | -    | -                | Router & NVR            |
-| UniFi US-16-XG              | 1     | -            | -                            | -    | -                | 10Gb Core Switch        |
-| UniFi USW-Enterprise-24-PoE | 1     | -            | -                            | -    | -                | 2.5Gb PoE Switch        |
-| UniFi USP PDU Pro           | 1     | -            | -                            | -    | -                | PDU                     |
-| APC SMT1500RM2U             | 1     | -            | -                            | -    | -                | UPS                     |
+| Device                      | Num | OS Disk Size | Data Disk Size                  | Ram  | OS            | Function                |
+|-----------------------------|-----|--------------|---------------------------------|------|---------------|-------------------------|
+| ASUS NUC 14 Pro CU 5 125H   | 3   | 1TB SSD      | 1TB (local) / 800GB (rook-ceph) | 96GB | Talos         | Kubernetes              |
+| PowerEdge T340              | 1   | 1TB SSD      | 8x22TB ZFS (mirrored vdevs)     | 64GB | TrueNAS SCALE | NFS + Backup Server     |
+| PiKVM (RasPi 4)             | 1   | 64GB (SD)    | -                               | 4GB  | PiKVM         | KVM                     |
+| TESmart 8 Port KVM Switch   | 1   | -            | -                               | -    | -             | Network KVM (for PiKVM) |
+| UniFi UDMP Max              | 1   | -            | 2x12TB HDD                      | -    | -             | Router & NVR            |
+| UniFi US-16-XG              | 1   | -            | -                               | -    | -             | 10Gb Core Switch        |
+| UniFi USW-Enterprise-24-PoE | 1   | -            | -                               | -    | -             | 2.5Gb PoE Switch        |
+| UniFi USP PDU Pro           | 1   | -            | -                               | -    | -             | PDU                     |
+| APC SMT1500RM2U             | 1   | -            | -                               | -    | -             | UPS                     |
 
 ---
 

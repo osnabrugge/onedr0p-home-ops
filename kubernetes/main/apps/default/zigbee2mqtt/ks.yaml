@@ -13,6 +13,7 @@ spec:
   dependsOn:
     - name: emqx-cluster
     - name: external-secrets-stores
+    - name: volsync
   path: ./kubernetes/main/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:
@@ -29,3 +30,4 @@ spec:
       VOLSYNC_ACCESSMODES: ReadWriteMany
       VOLSYNC_STORAGECLASS: ceph-filesystem
       VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
+      VOLSYNC_SNAP_ACCESSMODES: ReadOnlyMany # CephFS shallow snapshot

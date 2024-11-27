@@ -25,8 +25,6 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: volsync
-      namespace: volsync-system
   values:
     controllers:
       sabnzbd:
@@ -84,10 +82,7 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [10000]
         seccompProfile: { type: RuntimeDefault }
-      nodeSelector:
-        topology.kubernetes.io/zone: w
     service:
       app:
         controller: sabnzbd
@@ -120,7 +115,7 @@ spec:
       media:
         type: nfs
         server: expanse.internal
-        path: /eros/Media
+        path: /mnt/eros/Media
         globalMounts:
           - path: /media/Downloads/sabnzbd
             subPath: Downloads/sabnzbd

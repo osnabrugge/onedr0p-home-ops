@@ -36,6 +36,7 @@ jobs:
         uses: tj-actions/changed-files@v45
         with:
           files: kubernetes/**
+          files_ignore: kubernetes/shared/**
           dir_names: true
           dir_names_max_depth: 2
           matrix: true
@@ -85,7 +86,7 @@ jobs:
           path: pull
 
       - name: Gather Images in Default Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v6.0.0
+        uses: docker://ghcr.io/allenporter/flux-local:v6.0.2
         with:
           args: >-
             get cluster
@@ -95,7 +96,7 @@ jobs:
             --output-file default.yaml
 
       - name: Gather Images in Pull Request Branch
-        uses: docker://ghcr.io/allenporter/flux-local:v6.0.0
+        uses: docker://ghcr.io/allenporter/flux-local:v6.0.2
         with:
           args: >-
             get cluster

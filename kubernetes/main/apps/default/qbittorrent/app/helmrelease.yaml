@@ -25,8 +25,6 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: volsync
-      namespace: volsync-system
   values:
     controllers:
       qbittorrent:
@@ -36,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
-              tag: 5.0.1@sha256:684422cab9fe3cba04812cf4207398bb72aa0f0283c92fddecd833648ac3f7bf
+              tag: 5.0.2@sha256:adfd625f9cc7226eabad8aa117a551d42d5818c914850ef7fa3be60111383107
             env:
               TZ: America/New_York
               QBT_WEBUI_PORT: &port 80
@@ -75,11 +73,7 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [10000]
         seccompProfile: { type: RuntimeDefault }
-      nodeSelector:
-        topology.kubernetes.io/zone: w
-      terminationGracePeriodSeconds: 300
     service:
       app:
         controller: qbittorrent
@@ -108,6 +102,8 @@ spec:
     persistence:
       config:
         existingClaim: qbittorrent
+      tmp:
+        type: emptyDir
       scripts:
         type: configMap
         name: qbittorrent-scripts
@@ -117,7 +113,7 @@ spec:
       media:
         type: nfs
         server: expanse.internal
-        path: /eros/Media
+        path: /mnt/eros/Media
         globalMounts:
           - path: /media/Downloads/qbittorrent
             subPath: Downloads/qbittorrent

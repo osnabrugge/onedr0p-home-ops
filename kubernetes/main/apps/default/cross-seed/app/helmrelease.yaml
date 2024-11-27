@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cross-seed/cross-seed
-              tag: 6.0.0-43@sha256:65387a63068b39867aa33e44718dafc62f9cdc56f398683476449b9736351df0
+              tag: 6.0.0@sha256:58547efee5c8c14ed2cc1005abe90fd0f1c079599f4dbf9f353645f9c3f1e267
             env:
               TZ: America/New_York
             args: ["daemon"]
@@ -59,7 +59,6 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [10000]
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
@@ -86,7 +85,7 @@ spec:
       media:
         type: nfs
         server: expanse.internal
-        path: /eros/Media
+        path: /mnt/eros/Media
         globalMounts:
           - path: /media/Downloads
             subPath: Downloads
